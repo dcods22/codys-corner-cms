@@ -1,9 +1,25 @@
 import React from "react";
 import Protected from "../components/security/Protected";
+import CardContainer from "./card/CardContainer";
+import CardHeader from "./card/CardHeader";
+import CardBody from "./card/CardBody";
+import CardFooter from "./card/CardFooter";
+import ArticleBody from "../components/articles/ArticleBody";
+import ArticleFooter from "../components/articles/ArticleFooter";
 
 class ArticlesContainer extends React.Component {
   render() {
-    return <div>articles</div>;
+    return (
+      <CardContainer className="mt-3">
+        <CardHeader>Articles</CardHeader>
+        <CardBody>
+          <ArticleBody />
+        </CardBody>
+        <CardFooter>
+          <ArticleFooter />
+        </CardFooter>
+      </CardContainer>
+    );
   }
 }
 

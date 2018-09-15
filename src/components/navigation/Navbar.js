@@ -8,7 +8,7 @@ const Nav = styled.nav.attrs({
   className: "navbar navbar-expand-md"
 })`
   &&& {
-    background-color: ${props => props.theme.colors["navigation"]};
+    background-color: ${props => props.theme.colors["cc-blue"]};
   }
 `;
 

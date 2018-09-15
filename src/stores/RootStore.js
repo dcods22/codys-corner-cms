@@ -4,6 +4,9 @@ import CMSRouterStore from "./CMSRouterStore";
 import AuthStore from "./AuthStore";
 import HttpInterceptor from "../api/HttpInterceptor";
 import AuthApi from "../api/AuthApi";
+import ArticleAdminStore from "./ArticleAdminStore";
+import CMSApi from "../api/CMSApi";
+import CCApi from "../api/CCApi";
 
 class RootStore {
   constructor() {
@@ -13,6 +16,8 @@ class RootStore {
 
   createApis() {
     this.authApi = new AuthApi();
+    this.ccApi = new CCApi();
+    this.cmsApi = new CMSApi();
   }
 
   createStores() {
@@ -20,6 +25,7 @@ class RootStore {
     this.history = syncHistoryWithStore(createHistory(), this.routerStore);
     this.authStore = new AuthStore(this.routerStore, this.authApi);
     this.httpInterceptor = new HttpInterceptor(this.authStore);
+    this.articleAdminStore = new ArticleAdminStore(this.routerStore, this.cmsApi);
   }
 }
 

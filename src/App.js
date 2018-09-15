@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import { Route } from "react-router";
 import { Router, Switch } from "react-router-dom";
 import { Provider } from "mobx-react";
@@ -12,13 +13,21 @@ import ArticlesContainer from "./containers/ArticlesContainer";
 
 const rootStore = new RootStore();
 
+const Body = styled.div.attrs({
+  className: "cms-body"
+})`
+  background-color: ${props => props.theme.colors["light-grey"]};
+  height: 100vh;
+  width: 100vw;
+`;
+
 class App extends Component {
   render() {
     return (
       <Provider rootStore={rootStore}>
         <Router history={rootStore.history}>
           <ThemeProvider theme={ThemeConstants}>
-            <div className="cms-body">
+            <Body>
               <Navbar />
               <div className="container-fluid">
                 <Switch>
@@ -27,7 +36,7 @@ class App extends Component {
                   <Route exact path="" component={HomeContainer} />
                 </Switch>
               </div>
-            </div>
+            </Body>
           </ThemeProvider>
         </Router>
       </Provider>

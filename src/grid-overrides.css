@@ -1,0 +1,40 @@
+.react-grid-HeaderCell {
+    background: #f7f7f7 !important;
+    color: #002e6d !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #d2d2d2 !important;
+}
+
+/* Sorting Arrow */
+.react-grid-HeaderCell-sortable > span {
+    color: red !important;
+    padding: 4px !important;
+    font-size: .75rem !important;
+}
+
+.react-grid-Cell {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #ececec !important;
+}
+
+.react-grid-Cell--locked:last-of-type {
+    border-right: 1px solid #ddd !important;
+    -webkit-box-shadow: 4px 0 5px 0 rgba(210,210,210,1) !important;
+    -moz-box-shadow: 4px 0 5px 0 rgba(210,210,210,1) !important;
+    box-shadow: 4px 0 5px 0 rgba(210,210,210,1) !important;
+}
+
+.react-grid-Cell.sorted-col {
+    background: #f2f3f4 !important;
+    border-bottom: none !important;
+}
+
+.react-grid-HeaderCell-sortable {
+    display: flex;
+}
+
+.react-grid-HeaderCell-sortable > span {
+    order: 1;
+}

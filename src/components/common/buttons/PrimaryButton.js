@@ -5,7 +5,7 @@ const PrimaryButtonStyled = styled.button.attrs({
   className: "btn btn-primary"
 })`
   &&& {
-    background-color: ${props => props.theme.colors.navigation};
+    background-color: ${props => props.theme.ccNavContenttion};
   }
 `;
 
