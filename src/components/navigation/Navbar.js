@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import CCLink from "../common/CCLink";
 import NavItem from "./NavItem";
+import NavUser from "./NavUser";
 
 const Nav = styled.nav.attrs({
   className: "navbar navbar-expand-md"
@@ -38,6 +39,7 @@ class Navbar extends React.Component {
             </ul>
           </div>
         ) : null}
+        <ul className="navbar-nav ml-auto">{authStore.isLoggedIn ? <NavUser /> : null}</ul>
       </Nav>
     );
   }

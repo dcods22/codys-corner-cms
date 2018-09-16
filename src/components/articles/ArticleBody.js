@@ -1,14 +1,21 @@
 import React from "react";
+import ArticlesTable from "./ArticlesTable";
+import { inject, observer } from "mobx-react";
 
 class ArticleBody extends React.Component {
   render() {
+    const { articleAdminStore } = this.props.rootStore;
     return (
-      <div className="d-flex flex-wrap">
-        <div>Most Recent Articles</div>
-        <div>Not Published Articles</div>
+      <div className="row">
+        <div className="col-xs-12 col-md-6">
+          <ArticlesTable data={articleAdminStore.mostRecentArticles} title="Most Recent Articles" />
+        </div>
+        <div className="mt-3 mt-md-0 col-xs-12 col-md-6">
+          <ArticlesTable data={articleAdminStore.notPublishedArticles} title="Not Published Articles" />
+        </div>
       </div>
     );
   }
 }
 
-export default ArticleBody;
+export default inject("rootStore")(observer(ArticleBody));

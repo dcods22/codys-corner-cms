@@ -41,7 +41,7 @@ class AuthStore {
         this.authApi.getToken(encodedBody).then(data => {
           this.setLoggedIn(data);
           this.isLoggingIn = false;
-          localStorage.setItem(AuthConstants.KEYS.AUTHORITIES, JSON.stringify(data.authorities));
+          // localStorage.setItem(AuthConstants.KEYS.AUTHORITIES, JSON.stringify(data.authorities));
           this.authorities = data.authorities;
           if (!data || (data.error || (data.data && data.data.error))) {
             this.loginError = true;
@@ -83,9 +83,9 @@ class AuthStore {
       checkLocalStorage: action(() => {
         this.accessToken = localStorage.getItem(AuthConstants.KEYS.ACCESS_TOKEN);
         this.refreshToken = localStorage.getItem(AuthConstants.KEYS.REFRESH_TOKEN);
-        let user = JSON.parse(localStorage.getItem(AuthConstants.KEYS.USER));
-        this.user = observable.map().merge(user);
-        this.authorities = JSON.parse(localStorage.getItem(AuthConstants.KEYS.AUTHORITIES));
+        // let user = JSON.parse(localStorage.getItem(AuthConstants.KEYS.USER));
+        // this.user = observable.map().merge(user);
+        // this.authorities = JSON.parse(localStorage.getItem(AuthConstants.KEYS.AUTHORITIES));
       }),
       setLocalStorage: action(() => {
         localStorage.setItem(AuthConstants.KEYS.ACCESS_TOKEN, this.accessToken);

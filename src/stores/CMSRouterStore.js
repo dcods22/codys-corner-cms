@@ -3,12 +3,17 @@ import { RouterStore } from "mobx-react-router";
 
 class CMSRouterStore extends RouterStore {
   get isHomeTab() {
-    return true;
+    return this.location.pathname === "/";
+  }
+
+  get isArticlesTab() {
+    return this.location.pathname === "/articles";
   }
 }
 
 decorate(CMSRouterStore, {
-  isHomeTab: computed
+  isHomeTab: computed,
+  isArticlesTab: computed
 });
 
 export default CMSRouterStore;

@@ -7,7 +7,8 @@ import PrimaryButton from "../common/buttons/PrimaryButton";
 const Container = styled.div.attrs({
   className: "p-4"
 })`
-  border 1px solid ${props => props.theme.colors["light-grey"]}
+  border 1px solid ${props => props.theme.colors["light-grey"]};
+  background-color: ${props => props.theme.colors["almost-white"]};
 `;
 
 const Title = styled.div`

@@ -33,12 +33,11 @@ class DataTable extends React.Component {
   }
 
   render() {
-    const sortFunc = !!this.props.sortFunc ? this.props.sortFunc : () => {};
     const columns = this.checkForSortedColumn(this.props.columns, this.props.sortColumn, this.props.sortDirection);
     return (
       <ReactDataGrid
         columns={columns}
-        onGridSort={sortFunc}
+        onGridSort={this.props.sortFunc}
         rowGetter={this.rowGetter}
         rowsCount={this.props.data.length}
         minHeight={this.props.height}
