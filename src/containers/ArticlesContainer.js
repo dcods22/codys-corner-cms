@@ -4,8 +4,8 @@ import CardContainer from "./card/CardContainer";
 import CardHeader from "./card/CardHeader";
 import CardBody from "./card/CardBody";
 import CardFooter from "./card/CardFooter";
-import ArticleBody from "../components/articles/ArticleBody";
-import ArticleFooter from "../components/articles/ArticleFooter";
+import ArticleBody from "../components/articles/admin/ArticleBody";
+import ArticleFooter from "../components/articles/admin/ArticleFooter";
 
 class ArticlesContainer extends React.Component {
   render() {

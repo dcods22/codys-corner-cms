@@ -1,7 +1,7 @@
 import React from "react";
-import DataTable from "../common/tables/DataTable";
-import Heading from "../common/Heading";
-import DateFormatter from "../common/tables/DateFormatter";
+import DataTable from "../../common/tables/DataTable";
+import Heading from "../../common/Heading";
+import DateFormatter from "../../common/tables/DateFormatter";
 import ArticleEditIconFormatter from "./ArticleEditIconFormatter";
 
 const cols = [

@@ -9,6 +9,10 @@ class CMSRouterStore extends RouterStore {
   get isArticlesTab() {
     return this.location.pathname === "/articles";
   }
+
+  get isArticleEditTab() {
+    return this.location.pathname === "/articles/edit";
+  }
 }
 
 decorate(CMSRouterStore, {

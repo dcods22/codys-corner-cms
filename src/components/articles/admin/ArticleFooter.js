@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import StickyFooterButtons from "../common/form/StickyFooterButtons";
-import PrimaryButton from "../common/buttons/PrimaryButton";
+import StickyFooterButtons from "../../common/form/StickyFooterButtons";
+import PrimaryButton from "../../common/buttons/PrimaryButton";
 
 class ArticleFooter extends React.Component {
   render() {

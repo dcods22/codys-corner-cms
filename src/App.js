@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { Route } from "react-router";
 import { Router, Switch } from "react-router-dom";
 import { Provider } from "mobx-react";
+import { ThemeProvider } from "styled-components";
+import { ThemeConstants } from "./constants/ThemeConstants";
 import RootStore from "./stores/RootStore";
 import HomeContainer from "./containers/HomeContainer";
 import LoginContainer from "./containers/LoginContainer";
-import { ThemeProvider } from "styled-components";
-import { ThemeConstants } from "./constants/ThemeConstants";
 import Navbar from "./components/navigation/Navbar";
 import ArticlesContainer from "./containers/ArticlesContainer";
+import ArticleEditContainer from "./containers/ArticleEditContainer";
 
 const rootStore = new RootStore();
 
@@ -33,6 +34,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/login" component={LoginContainer} />
                   <Route exact path="/articles" component={ArticlesContainer} />
+                  <Route exact path="/articles/edit" component={ArticleEditContainer} />
                   <Route exact path="" component={HomeContainer} />
                 </Switch>
               </div>

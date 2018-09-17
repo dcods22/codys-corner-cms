@@ -65,6 +65,14 @@
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.3.1.tgz#5466b8f31c1f493a96754c1426c25796d0633dd9"
 
+"@tinymce/tinymce-react@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-2.2.6.tgz#8e3d8dc65e9b9ae1f5232e1e53453039f5afa2f4"
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -5765,6 +5773,15 @@ react-dev-utils@^5.0.2:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
+react-dom@^16.2.0:
+  version "16.5.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.1.tgz#29d0c5a01ed3b6b4c14309aa91af6ec4eb4f292c"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    schedule "^0.4.0"
+
 react-dom@^16.5.0:
   version "16.5.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.5.0.tgz#57704e5718669374b182a17ea79a6d24922cb27d"
@@ -5888,6 +5905,15 @@ react-transition-group@^2.2.1:
     loose-envify "^1.3.1"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react@^16.2.0:
+  version "16.5.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.5.1.tgz#8cb8e9f8cdcb4bde41c9a138bfbf907e66132372"
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    schedule "^0.4.0"
 
 react@^16.5.0:
   version "16.5.0"
@@ -6261,6 +6287,12 @@ sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
 schedule@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.3.0.tgz#1be2ab2fc2e768536269ce7326efb478d6c045e8"
+  dependencies:
+    object-assign "^4.1.1"
+
+schedule@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/schedule/-/schedule-0.4.0.tgz#fa20cfd0bfbf91c47d02272fd7096780d3170bbb"
   dependencies:
     object-assign "^4.1.1"
 
@@ -6848,6 +6880,10 @@ timers-browserify@^2.0.4:
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.10.tgz#1d28e3d2aadf1d5a5996c4e9f95601cd053480ae"
   dependencies:
     setimmediate "^1.0.4"
+
+tinymce@^4.8.3:
+  version "4.8.3"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-4.8.3.tgz#fdfe92121a5431fc6e2f295346f781cd200db3b9"
 
 tmp@^0.0.33:
   version "0.0.33"
