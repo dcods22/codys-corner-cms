@@ -11,6 +11,11 @@ class CMSApi {
     const url = BASE_URL + "/articles/notPublished";
     return axios.get(url).then(response => response.data);
   }
+
+  saveArticle(article) {
+    const url = BASE_URL + "/articles";
+    return axios.post(url, article).then(response => response.data);
+  }
 }
 
 export default CMSApi;

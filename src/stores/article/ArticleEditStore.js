@@ -9,11 +9,13 @@ class ArticleEditStore {
 
     this.defaults = {
       article: {
+        articleId: null,
         article: "",
         title: "",
         subject: "",
         articleImg: "",
-        imageSource: ""
+        imageSource: "",
+        tagMappings: []
       },
       articleId: -1,
       selectedTags: [],
@@ -37,11 +39,12 @@ class ArticleEditStore {
         }
       }),
       updateSelectedTags: action(tagMappins => {
-        let tags = tagMappins.map(t => ({
-          text: t.tag.tag,
-          id: t.tag.tagId
-        }));
-        this.selectedTags = tags;
+        if (tagMappins) {
+          this.selectedTags = tagMappins.map(t => ({
+            text: t.tag.tag,
+            id: t.tag.tagId
+          }));
+        }
       }),
       removeSelectedTag: action(value => {
         this.selectedTags.splice(value, 1);
@@ -52,6 +55,14 @@ class ArticleEditStore {
       updateFromUrl: action(search => {
         let params = queryString.parse(search);
         this.articleId = params["id"];
+      }),
+      save: action(() => {
+        this.cmsApi.saveArticle(this.finalizedArticle).then(data => {
+          this.setArticle(data);
+        });
+      }),
+      cancel: action(() => {
+        this.routerStore.history.push("/articles");
       })
     });
 
@@ -100,6 +111,35 @@ class ArticleEditStore {
       options.push({ text: t.tag, id: t.tagId });
     }
     return options;
+  }
+
+  get finalizedArticle() {
+    const finalized = Object.assign({}, this.article);
+    finalized.tagMappings = this.createTagMappings(finalized, this.selectedTags);
+    return finalized;
+  }
+
+  createTagMappings(article, selectedTags) {
+    let tagMappings = [];
+    let currentTagMappings = article.tagMappings;
+    for (let index in selectedTags) {
+      let tag = selectedTags[index];
+      if (!this.isNewTag(tag)) {
+        let existing = currentTagMappings.find(t => t.tag.tag === tag.text);
+        if (existing) {
+          tagMappings.push(existing);
+        } else {
+          tagMappings.push({ tagMappingId: null, articleId: article.articleId, tag: { tagId: null, tag: tag.text } });
+        }
+      } else {
+        tagMappings.push({ tagMappingId: null, articleId: article.articleId, tag: { tagId: null, tag: tag.text } });
+      }
+    }
+    return tagMappings;
+  }
+
+  isNewTag(tag) {
+    return tag.id === tag.text;
   }
 }
 
