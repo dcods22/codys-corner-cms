@@ -31,8 +31,12 @@ class ArticleEditStore {
       setTags: action(value => {
         this.tags = value;
       }),
-      setSelectedTags: action(value => {
-        this.selectedTags = value;
+      addSelectedTag: action(value => {
+        console.log(value);
+        this.selectedTags.push(value);
+      }),
+      removeSelectedTag: action(value => {
+        this.selectedTags.splice(value, 1);
       }),
       onChange: action((key, value) => {
         this.article[key] = value;
@@ -74,7 +78,7 @@ class ArticleEditStore {
     let options = [];
     for (let i = 0; i < this.tags.length; i++) {
       let t = this.tags[i];
-      options.push({ label: t.tag, value: t });
+      options.push({ text: t.tag, id: t.tagId });
     }
     return options;
   }

@@ -1,0 +1,38 @@
+/* Example Styles for React Tags*/
+.ReactTags__tags {
+    position: relative;
+}
+
+.ReactTags__remove {
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+/* Styles for suggestions */
+.ReactTags__suggestions {
+
+}
+.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
+    background: white;
+    width: 250px;
+}
+.ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: .3rem;
+    margin-left: -40px;
+    padding-left: 10px;
+}
+
+.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+    margin: 0;
+}
+
+.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    cursor: pointer;
+    background-color: #e7e7e7;
+}

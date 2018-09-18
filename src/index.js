@@ -6,7 +6,8 @@ import "bootstrap/dist/js/bootstrap.bundle";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/css/v4-shims.css";
 import "./index.css";
-import "./grid-overrides.css";
+import "./styles/grid-overrides.css";
+import "./styles/tag-styles.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 

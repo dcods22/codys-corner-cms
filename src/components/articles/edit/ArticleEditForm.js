@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { Editor } from "@tinymce/tinymce-react";
 import Label from "../../common/Label";
-import ComptixSelect from "../../common/form/CCSelect";
+import { WithContext as ReactTags } from "react-tag-input";
 
 const ImagePreview = styled.img.attrs({
   className: "mr-3",
@@ -78,13 +78,17 @@ class ArticleEditForm extends React.Component {
           </div>
           <div className="form-group">
             <Label>Tags</Label>
-            <ComptixSelect
-              isMulti={true}
-              options={articleEditStore.tagOptions}
-              onChange={event => {
-                articleEditStore.setSelectedTags(event);
+            <ReactTags
+              placeholder="Tags..."
+              tags={articleEditStore.selectedTags}
+              suggestions={articleEditStore.tagOptions}
+              handleDelete={articleEditStore.removeSelectedTag}
+              handleAddition={articleEditStore.addSelectedTag}
+              classNames={{
+                tag: "btn btn-outline-secondary btn-sm mr-2",
+                tagInputField: "form-control mt-2",
+                selected: "label-control"
               }}
-              value={articleEditStore.selectedTags}
             />
           </div>
         </form>
