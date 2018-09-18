@@ -18,8 +18,8 @@ const Body = styled.div.attrs({
   className: "cms-body"
 })`
   background-color: ${props => props.theme.colors["light-grey"]};
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
 `;
 
 class App extends Component {

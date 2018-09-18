@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div.attrs({
-  className: "card"
+  className: "card my-3"
 })`
   border: 1px solid ${props => props.theme.colors["medium-grey"]};
 `;

@@ -8,7 +8,7 @@ import CardFooter from "./card/CardFooter";
 class HomeContainer extends React.Component {
   render() {
     return (
-      <CardContainer className="mt-3">
+      <CardContainer>
         <CardHeader>Cody's Corner CMS</CardHeader>
         <CardBody>
           <div>Dashboard of whats going on with the site. User count, article count, visits, last posted article </div>

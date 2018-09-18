@@ -10,7 +10,7 @@ import ArticleFooter from "../components/articles/admin/ArticleFooter";
 class ArticlesContainer extends React.Component {
   render() {
     return (
-      <CardContainer className="mt-3">
+      <CardContainer>
         <CardHeader>Articles</CardHeader>
         <CardBody>
           <ArticleBody />

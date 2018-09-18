@@ -11,7 +11,7 @@ import ArticleEditHeader from "../components/articles/edit/ArticleEditHeader";
 class ArticleEditContainer extends React.Component {
   render() {
     return (
-      <CardContainer className="mt-3">
+      <CardContainer>
         <CardHeader>
           <ArticleEditHeader />
         </CardHeader>
