@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { Editor } from "@tinymce/tinymce-react";
 import Label from "../../common/Label";
-import { WithContext as ReactTags } from "react-tag-input";
+import TagSelect from "../../common/form/TagSelect";
 
 const ImagePreview = styled.img.attrs({
   className: "mr-3",
@@ -47,19 +47,45 @@ class ArticleEditForm extends React.Component {
           </div>
           <div className="form-group">
             <div className="d-flex">
-              <ImagePreview src={article.articleImg} />
+              <div>
+                <ImagePreview src={article.articleImg} />
+              </div>
               <PreviewUrlHolder>
-                <Label>Image</Label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={article.articleImg}
-                  onChange={event => {
-                    articleEditStore.onChange("articleImg", event.target.value);
-                  }}
-                />
+                <div className="d-flex flex-column">
+                  <div>
+                    <Label>Image</Label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      value={article.articleImg}
+                      onChange={event => {
+                        articleEditStore.onChange("articleImg", event.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="mt-2">
+                    <Label>Image Source</Label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      value={article.imageSource}
+                      onChange={event => {
+                        articleEditStore.onChange("imageSource", event.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
               </PreviewUrlHolder>
             </div>
+          </div>
+          <div className="form-group">
+            <Label>Tags</Label>
+            <TagSelect
+              tags={articleEditStore.selectedTags}
+              suggestions={articleEditStore.tagOptions}
+              handleDelete={articleEditStore.removeSelectedTag}
+              handleAddition={articleEditStore.addSelectedTag}
+            />
           </div>
           <div className="form-group">
             <Label>Article</Label>
@@ -74,21 +100,6 @@ class ArticleEditForm extends React.Component {
               }}
               plugins="anchor code media image link table wordcount textcolor imagetools autolink textpattern help"
               toolbar="bold italic strikethrough forecolor backcolor anchor textcolor | code media image link | table wordcount "
-            />
-          </div>
-          <div className="form-group">
-            <Label>Tags</Label>
-            <ReactTags
-              placeholder="Tags..."
-              tags={articleEditStore.selectedTags}
-              suggestions={articleEditStore.tagOptions}
-              handleDelete={articleEditStore.removeSelectedTag}
-              handleAddition={articleEditStore.addSelectedTag}
-              classNames={{
-                tag: "btn btn-outline-secondary btn-sm mr-2",
-                tagInputField: "form-control mt-2",
-                selected: "label-control"
-              }}
             />
           </div>
         </form>

@@ -2,14 +2,14 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import StickyFooterButtons from "../../common/form/StickyFooterButtons";
 import PrimaryButton from "../../common/buttons/PrimaryButton";
+import LightButton from "../../common/buttons/LightButton";
 
 class ArticleEditFooter extends React.Component {
   render() {
     return (
       <StickyFooterButtons>
-        <PrimaryButton>Add Tag</PrimaryButton>
         <PrimaryButton>Save</PrimaryButton>
-        <PrimaryButton>Cancel</PrimaryButton>
+        <LightButton>Cancel</LightButton>
       </StickyFooterButtons>
     );
   }

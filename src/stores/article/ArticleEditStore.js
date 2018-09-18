@@ -12,7 +12,8 @@ class ArticleEditStore {
         article: "",
         title: "",
         subject: "",
-        articleImg: ""
+        articleImg: "",
+        imageSource: ""
       },
       articleId: -1,
       selectedTags: [],
@@ -24,7 +25,6 @@ class ArticleEditStore {
       articleId: this.defaults["articleId"],
       selectedTags: this.defaults["selectedTags"],
       tags: this.defaults["tags"],
-      test: [],
       setArticle: action(value => {
         this.article = value;
       }),
@@ -32,8 +32,16 @@ class ArticleEditStore {
         this.tags = value;
       }),
       addSelectedTag: action(value => {
-        console.log(value);
-        this.selectedTags.push(value);
+        if (!this.tagExists(value, this.selectedTags)) {
+          this.selectedTags.push(value);
+        }
+      }),
+      updateSelectedTags: action(tagMappins => {
+        let tags = tagMappins.map(t => ({
+          text: t.tag.tag,
+          id: t.tag.tagId
+        }));
+        this.selectedTags = tags;
       }),
       removeSelectedTag: action(value => {
         this.selectedTags.splice(value, 1);
@@ -61,6 +69,7 @@ class ArticleEditStore {
   getArticle(articleId) {
     this.ccApi.getArticle(articleId).then(data => {
       this.setArticle(data);
+      this.updateSelectedTags(data.tagMappings);
     });
   }
 
@@ -72,6 +81,16 @@ class ArticleEditStore {
     this.ccApi.getAllTags().then(data => {
       this.setTags(data);
     });
+  }
+
+  tagExists(value, tags) {
+    let exists = false;
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i].text.toLowerCase() === value.text.toLowerCase()) {
+        exists = true;
+      }
+    }
+    return exists;
   }
 
   get tagOptions() {
