@@ -11,6 +11,11 @@ class CCApi {
     const URL = BASE_URL + "/tags";
     return axios.get(URL).then(response => response.data);
   };
+
+  getArticleStatuses = () => {
+    const URL = BASE_URL + "/articles/statuses";
+    return axios.get(URL).then(response => response.data);
+  };
 }
 
 export default CCApi;

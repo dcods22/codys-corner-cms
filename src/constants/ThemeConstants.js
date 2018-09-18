@@ -11,6 +11,11 @@ export const ThemeConstants = {
     black: "#000000",
     "light-black": "#454545",
     "active-link-color": "#eff8ff",
-    "cc-blue": "#00244a"
+    "cc-blue": "#00244a",
+    red: "#ff2126",
+    orange: "#ffa133",
+    blue: "#3d4eff",
+    purple: "#b976ff",
+    green: "#47ff7e"
   }
 };

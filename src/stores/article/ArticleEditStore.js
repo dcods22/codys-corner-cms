@@ -1,5 +1,6 @@
 import { decorate, extendObservable, action, computed, autorun } from "mobx";
 import queryString from "query-string";
+import { StringUtility } from "../../utils/StringUtility";
 
 class ArticleEditStore {
   constructor(routerStore, ccApi, cmsApi) {
@@ -15,9 +16,16 @@ class ArticleEditStore {
         subject: "",
         articleImg: "",
         imageSource: "",
-        tagMappings: []
+        tagMappings: [],
+        articleStatus: {
+          articleStatusMapping: {
+            status: null,
+            id: null
+          }
+        }
       },
-      articleId: -1,
+      articleId: "-1",
+      articleStatuses: [],
       selectedTags: [],
       tags: []
     };
@@ -25,16 +33,24 @@ class ArticleEditStore {
     extendObservable(this, {
       article: this.defaults["article"],
       articleId: this.defaults["articleId"],
+      articleStatuses: this.defaults["articleStatuses"],
       selectedTags: this.defaults["selectedTags"],
       tags: this.defaults["tags"],
       setArticle: action(value => {
         this.article = value;
+      }),
+      setArticleStatuses: action(value => {
+        this.articleStatuses = value;
+      }),
+      setArticleStatus: action(value => {
+        this.article.articleStatus = value;
       }),
       setTags: action(value => {
         this.tags = value;
       }),
       addSelectedTag: action(value => {
         if (!this.tagExists(value, this.selectedTags)) {
+          value.text = StringUtility.toTitleCase(value.text);
           this.selectedTags.push(value);
         }
       }),
@@ -70,7 +86,7 @@ class ArticleEditStore {
       if (this.routerStore.isArticleEditTab) {
         this.getInitialData();
         this.updateFromUrl(this.routerStore.location.search);
-        if (this.articleId !== this.defaults["articleId"]) {
+        if (this.isNewArticle) {
           this.getArticle(this.articleId);
         }
       }
@@ -86,11 +102,22 @@ class ArticleEditStore {
 
   getInitialData() {
     this.getAllTags();
+    this.getArticleStatuses();
   }
 
   getAllTags() {
     this.ccApi.getAllTags().then(data => {
       this.setTags(data);
+    });
+  }
+
+  getArticleStatuses() {
+    this.ccApi.getArticleStatuses().then(data => {
+      this.setArticleStatuses(data);
+      if (this.isNewArticle) {
+        let notPublished = this.articleStatuses.find(as => as.id === 1);
+        this.setArticleStatus(notPublished);
+      }
     });
   }
 
@@ -111,12 +138,6 @@ class ArticleEditStore {
       options.push({ text: t.tag, id: t.tagId });
     }
     return options;
-  }
-
-  get finalizedArticle() {
-    const finalized = Object.assign({}, this.article);
-    finalized.tagMappings = this.createTagMappings(finalized, this.selectedTags);
-    return finalized;
   }
 
   createTagMappings(article, selectedTags) {
@@ -141,10 +162,27 @@ class ArticleEditStore {
   isNewTag(tag) {
     return tag.id === tag.text;
   }
+
+  get finalizedArticle() {
+    const finalized = Object.assign({}, this.article);
+    finalized.tagMappings = this.createTagMappings(finalized, this.selectedTags);
+    return finalized;
+  }
+
+  get currentArticleStatus() {
+    let article = Object.assign({}, this.article);
+    return article.articleStatus ? article.articleStatus.articleStatusMapping.status : "Not Known";
+  }
+
+  get isNewArticle() {
+    return this.articleId !== this.defaults["articleId"];
+  }
 }
 
 decorate(ArticleEditStore, {
-  tagOptions: computed
+  tagOptions: computed,
+  isNewArticle: computed,
+  currentArticleStatus: computed
 });
 
 export default ArticleEditStore;
