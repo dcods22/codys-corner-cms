@@ -70,15 +70,21 @@ class ArticleEditStore {
       }),
       updateFromUrl: action(search => {
         let params = queryString.parse(search);
-        this.articleId = params["id"];
+        this.articleId = params["id"].toString();
       }),
       save: action(() => {
         this.cmsApi.saveArticle(this.finalizedArticle).then(data => {
           this.setArticle(data);
+          this.routerStore.history.push("/articles/edit?id=" + data.articleId);
         });
       }),
       cancel: action(() => {
         this.routerStore.history.push("/articles");
+      }),
+      resetStore: action(() => {
+        this.article = this.defaults["article"];
+        this.selectedTags = this.defaults["selectedTags"];
+        this.articleId = this.defaults["articleId"];
       })
     });
 
@@ -86,8 +92,23 @@ class ArticleEditStore {
       if (this.routerStore.isArticleEditTab) {
         this.getInitialData();
         this.updateFromUrl(this.routerStore.location.search);
-        if (this.isNewArticle) {
+        if (!this.isNewArticle) {
           this.getArticle(this.articleId);
+        }
+      } else {
+        this.resetStore();
+      }
+    });
+
+    autorun(() => {
+      if (this.isNewArticle) {
+        let notPublished = this.articleStatuses.find(as => as.articleStatusMappingId === 1);
+        if (notPublished) {
+          let mapping = {
+            articleId: null,
+            articleStatusMapping: notPublished
+          };
+          this.setArticleStatus(mapping);
         }
       }
     });
@@ -114,10 +135,6 @@ class ArticleEditStore {
   getArticleStatuses() {
     this.ccApi.getArticleStatuses().then(data => {
       this.setArticleStatuses(data);
-      if (this.isNewArticle) {
-        let notPublished = this.articleStatuses.find(as => as.id === 1);
-        this.setArticleStatus(notPublished);
-      }
     });
   }
 
@@ -131,29 +148,19 @@ class ArticleEditStore {
     return exists;
   }
 
-  get tagOptions() {
-    let options = [];
-    for (let i = 0; i < this.tags.length; i++) {
-      let t = this.tags[i];
-      options.push({ text: t.tag, id: t.tagId });
-    }
-    return options;
-  }
-
   createTagMappings(article, selectedTags) {
     let tagMappings = [];
-    let currentTagMappings = article.tagMappings;
     for (let index in selectedTags) {
       let tag = selectedTags[index];
       if (!this.isNewTag(tag)) {
-        let existing = currentTagMappings.find(t => t.tag.tag === tag.text);
+        let existing = this.tags.find(t => t.tag === tag.text);
         if (existing) {
-          tagMappings.push(existing);
+          tagMappings.push({ tagMappingId: null, tag: existing });
         } else {
-          tagMappings.push({ tagMappingId: null, articleId: article.articleId, tag: { tagId: null, tag: tag.text } });
+          tagMappings.push({ tagMappingId: null, tag: { tagId: null, tag: tag.text } });
         }
       } else {
-        tagMappings.push({ tagMappingId: null, articleId: article.articleId, tag: { tagId: null, tag: tag.text } });
+        tagMappings.push({ tagMappingId: null, tag: { tagId: null, tag: tag.text } });
       }
     }
     return tagMappings;
@@ -161,6 +168,15 @@ class ArticleEditStore {
 
   isNewTag(tag) {
     return tag.id === tag.text;
+  }
+
+  get tagOptions() {
+    let options = [];
+    for (let i = 0; i < this.tags.length; i++) {
+      let t = this.tags[i];
+      options.push({ text: t.tag, id: t.tagId });
+    }
+    return options;
   }
 
   get finalizedArticle() {
@@ -175,7 +191,7 @@ class ArticleEditStore {
   }
 
   get isNewArticle() {
-    return this.articleId !== this.defaults["articleId"];
+    return this.articleId === this.defaults["articleId"];
   }
 }
 
