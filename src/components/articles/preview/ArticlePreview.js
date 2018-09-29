@@ -26,9 +26,15 @@ const Image = styled.img.attrs({
   }
 `;
 
-const ArticleHolder = styled.div`
-  &&& {
-  }
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 1.8rem;
+`;
+
+const Subject = styled.div`
+  font-size: 1.3rem;
+  font-style: italic;
+  color: ${props => props.theme.colors["dark-grey"]};
 `;
 
 class ArticlePreview extends React.Component {
@@ -43,14 +49,14 @@ class ArticlePreview extends React.Component {
             </div>
 
             <div className="mt-3">
-              <h3>{article.title}</h3>
+              <Title>{article.title}</Title>
             </div>
 
             <div>
-              <h5>{article.subject}</h5>
+              <Subject>{article.subject}</Subject>
             </div>
 
-            <ArticleHolder>{ReactHtmlParser(article.article)}</ArticleHolder>
+            <div>{ReactHtmlParser(article.article)}</div>
 
             <div>
               {tags.map(t => (

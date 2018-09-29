@@ -5,7 +5,7 @@ const LightButtonStyled = styled.button.attrs({
   className: "btn btn-light"
 })`
   &&& {
-    background-color: ${props => props.theme.ccNavContenttion};
+    background-color: ${props => props.theme.colors["light-grey2"]};
   }
 `;
 

@@ -9,7 +9,7 @@ class ArticleFooter extends React.Component {
     return (
       <StickyFooterButtons>
         <PrimaryButton className="float-right" onClick={articleAdminStore.addNewArticle}>
-          Add Article
+          <i className="fa fa-plus" /> New Article
         </PrimaryButton>
       </StickyFooterButtons>
     );
