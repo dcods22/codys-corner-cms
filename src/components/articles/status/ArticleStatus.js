@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Label from "../common/Label";
-import { ThemeConstants } from "../../constants/ThemeConstants";
+import Label from "../../common/Label";
+import { ThemeConstants } from "../../../constants/ThemeConstants";
+import { ArticleStatus as ArticleStatusConstants } from "../../../constants/ArticleStatusConstants";
 
 const StatusValue = styled.div`
   font-size: 1.1rem;
@@ -12,13 +13,13 @@ const StatusValue = styled.div`
 class ArticleStatus extends React.Component {
   getColor(status) {
     switch (status) {
-      case "Not Published":
+      case ArticleStatusConstants.NOT_PUBLISHED.name:
         return ThemeConstants.colors.red;
-      case "Pending Approval":
+      case ArticleStatusConstants.PENDING_APPROVAL.name:
         return ThemeConstants.colors.purple;
-      case "Removed":
+      case ArticleStatusConstants.REMOVED.name:
         return ThemeConstants.colors.red;
-      case "Published":
+      case ArticleStatusConstants.PUBLISHED.name:
         return ThemeConstants.colors.green;
       default:
         return ThemeConstants.colors.red;

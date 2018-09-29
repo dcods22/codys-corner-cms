@@ -9,8 +9,9 @@ import RootStore from "./stores/RootStore";
 import HomeContainer from "./containers/HomeContainer";
 import LoginContainer from "./containers/LoginContainer";
 import Navbar from "./components/navigation/Navbar";
-import ArticlesContainer from "./containers/ArticlesContainer";
-import ArticleEditContainer from "./containers/ArticleEditContainer";
+import ArticlesContainer from "./containers/articles/ArticlesContainer";
+import ArticleEditContainer from "./containers/articles/ArticleEditContainer";
+import ArticlePreviewContainer from "./containers/articles/ArticlePreviewContainer";
 
 const rootStore = new RootStore();
 
@@ -35,6 +36,7 @@ class App extends Component {
                   <Route exact path="/login" component={LoginContainer} />
                   <Route exact path="/articles" component={ArticlesContainer} />
                   <Route exact path="/articles/edit" component={ArticleEditContainer} />
+                  <Route exact path="/articles/preview" component={ArticlePreviewContainer} />
                   <Route exact path="" component={HomeContainer} />
                 </Switch>
               </div>

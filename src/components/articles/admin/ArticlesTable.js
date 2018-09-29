@@ -3,6 +3,7 @@ import DataTable from "../../common/tables/DataTable";
 import Heading from "../../common/Heading";
 import DateFormatter from "../../common/tables/DateFormatter";
 import ArticleEditIconFormatter from "./ArticleEditIconFormatter";
+import ArticlePreviewIconFormatter from "./ArticlePreviewIconFormatter";
 
 const cols = [
   {
@@ -10,6 +11,14 @@ const cols = [
     name: "",
     resizable: false,
     formatter: ArticleEditIconFormatter,
+    width: 40,
+    cellClass: "text-center"
+  },
+  {
+    key: "articleId1",
+    name: "",
+    resizable: false,
+    formatter: ArticlePreviewIconFormatter,
     width: 40,
     cellClass: "text-center"
   },
@@ -25,7 +34,7 @@ class ArticlesTable extends React.Component {
       <div>
         <Heading>{this.props.title}</Heading>
         <div>
-          <DataTable data={this.props.data} columns={cols} height={500} />
+          <DataTable data={this.props.data} columns={cols} height={300} />
         </div>
       </div>
     );

@@ -8,6 +8,8 @@ import ArticleAdminStore from "./article/ArticleAdminStore";
 import CMSApi from "../api/CMSApi";
 import CCApi from "../api/CCApi";
 import ArticleEditStore from "./article/ArticleEditStore";
+import ArticlePreviewStore from "./article/ArticlePreviewStore";
+import ArticleStatusStore from "./article/ArticleStatusStore";
 
 class RootStore {
   constructor() {
@@ -28,6 +30,8 @@ class RootStore {
     this.httpInterceptor = new HttpInterceptor(this.authStore);
     this.articleAdminStore = new ArticleAdminStore(this.routerStore, this.cmsApi);
     this.articleEditStore = new ArticleEditStore(this.routerStore, this.ccApi, this.cmsApi);
+    this.articlePreviewStore = new ArticlePreviewStore(this.routerStore, this.ccApi, this.cmsApi);
+    this.articleStatusStore = new ArticleStatusStore(this.routerStore, this.ccApi, this.cmsApi);
   }
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import ArticleEditForm from "./ArticleEditForm";
-import ArticleStatus from "../ArticleStatus";
+import ArticleStatus from "../status/ArticleStatus";
 
 class ArticleEditBody extends React.Component {
   render() {

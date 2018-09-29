@@ -7,17 +7,27 @@ class ArticleAdminStore {
 
     this.defaults = {
       mostRecentArticlesData: [],
-      notPublishedArticlesData: []
+      notPublishedArticlesData: [],
+      pendingApprovalArticlesData: [],
+      approvedArticlesData: []
     };
 
     extendObservable(this, {
       mostRecentArticlesData: this.defaults["mostRecentArticlesData"],
       notPublishedArticlesData: this.defaults["notPublishedArticlesData"],
-      setMostRecentArticles: action(value => {
-        this.mostRecentArticlesData = value;
+      pendingApprovalArticlesData: this.defaults["pendingApprovalArticlesData"],
+      approvedArticlesData: this.defaults["approvedArticlesData"],
+      setMostRecentArticles: action(values => {
+        this.mostRecentArticlesData = values;
       }),
-      setNotPublishedArticles: action(value => {
-        this.notPublishedArticlesData = value;
+      setNotPublishedArticles: action(values => {
+        this.notPublishedArticlesData = values;
+      }),
+      setPendingApprovalArticles: action(values => {
+        this.pendingApprovalArticlesData = values;
+      }),
+      setApprovedArticles: action(values => {
+        this.approvedArticlesData = values;
       }),
       addNewArticle: action(() => {
         this.routerStore.history.push("/articles/edit?id=-1");
@@ -40,6 +50,7 @@ class ArticleAdminStore {
   getInitialData() {
     this.getMostRecentArticles();
     this.getNotPublishedArticles();
+    this.getPendingApprovalArticles();
   }
 
   getMostRecentArticles() {
@@ -54,8 +65,15 @@ class ArticleAdminStore {
     });
   }
 
+  getPendingApprovalArticles() {
+    this.cmsApi.getPendingApprovalArticles().then(data => {
+      this.setPendingApprovalArticles(data);
+    });
+  }
+
   get mostRecentArticles() {
     return this.mostRecentArticlesData.map(a => ({
+      articleId1: a.articleId,
       articleId: a.articleId,
       title: a.title,
       subject: a.subject,
@@ -63,8 +81,32 @@ class ArticleAdminStore {
       authorName: a.author.firstName + " " + a.author.lastName
     }));
   }
+
   get notPublishedArticles() {
     return this.notPublishedArticlesData.map(a => ({
+      articleId1: a.articleId,
+      articleId: a.articleId,
+      title: a.title,
+      subject: a.subject,
+      datePosted: a.datePosted,
+      authorName: a.author.firstName + " " + a.author.lastName
+    }));
+  }
+
+  get pendingApprovalArticles() {
+    return this.pendingApprovalArticlesData.map(a => ({
+      articleId1: a.articleId,
+      articleId: a.articleId,
+      title: a.title,
+      subject: a.subject,
+      datePosted: a.datePosted,
+      authorName: a.author.firstName + " " + a.author.lastName
+    }));
+  }
+
+  get publishedArticles() {
+    return this.approvedArticlesData.map(a => ({
+      articleId1: a.articleId,
       articleId: a.articleId,
       title: a.title,
       subject: a.subject,
@@ -76,7 +118,9 @@ class ArticleAdminStore {
 
 decorate(ArticleAdminStore, {
   mostRecentArticles: computed,
-  notPublishedArticles: computed
+  notPublishedArticles: computed,
+  pendingApprovalArticles: computed,
+  publishedArticles: computed
 });
 
 export default ArticleAdminStore;

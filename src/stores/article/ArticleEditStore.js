@@ -81,6 +81,12 @@ class ArticleEditStore {
       cancel: action(() => {
         this.routerStore.history.push("/articles");
       }),
+      preview: action(() => {
+        this.cmsApi.saveArticle(this.finalizedArticle).then(data => {
+          this.setArticle(data);
+          this.routerStore.history.push("/articles/preview?id=" + data.articleId);
+        });
+      }),
       resetStore: action(() => {
         this.article = this.defaults["article"];
         this.selectedTags = this.defaults["selectedTags"];
@@ -152,7 +158,9 @@ class ArticleEditStore {
     let tagMappings = [];
     for (let index in selectedTags) {
       let tag = selectedTags[index];
-      if (!this.isNewTag(tag)) {
+      if (this.isExistingTagMapping(article, tag)) {
+        tagMappings.push(this.findTagMapping(article, tag));
+      } else if (!this.isNewTag(tag)) {
         let existing = this.tags.find(t => t.tag === tag.text);
         if (existing) {
           tagMappings.push({ tagMappingId: null, tag: existing });
@@ -168,6 +176,16 @@ class ArticleEditStore {
 
   isNewTag(tag) {
     return tag.id === tag.text;
+  }
+
+  isExistingTagMapping(article, tag) {
+    return !!this.findTagMapping(article, tag);
+  }
+
+  findTagMapping(article, tag) {
+    let mappings = article.tagMappings;
+    let filtered = mappings.filter(a => a.tag.tag === tag.text);
+    return filtered && filtered.length ? filtered[0] : null;
   }
 
   get tagOptions() {

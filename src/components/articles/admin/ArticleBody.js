@@ -13,6 +13,12 @@ class ArticleBody extends React.Component {
         <div className="mt-3 mt-md-0 col-xs-12 col-md-6">
           <ArticlesTable data={articleAdminStore.notPublishedArticles} title="Not Published Articles" />
         </div>
+        <div className="mt-3 mt-md-0 col-xs-12 col-md-6">
+          <ArticlesTable data={articleAdminStore.pendingApprovalArticles} title="Pending Approval Articles" />
+        </div>
+        <div className="mt-3 mt-md-0 col-xs-12 col-md-6">
+          <ArticlesTable data={articleAdminStore.publishedArticles} title="Published Articles" />
+        </div>
       </div>
     );
   }

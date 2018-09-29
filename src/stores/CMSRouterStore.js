@@ -13,6 +13,13 @@ class CMSRouterStore extends RouterStore {
   get isArticleEditTab() {
     return this.location.pathname === "/articles/edit";
   }
+  get isArticlePreviewTab() {
+    return this.location.pathname === "/articles/preview";
+  }
+
+  refresh() {
+    this.go();
+  }
 }
 
 decorate(CMSRouterStore, {
